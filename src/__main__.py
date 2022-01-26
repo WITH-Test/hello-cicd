@@ -1,10 +1,5 @@
-import logging
-
-logger = logging.getLogger("mirror.main")
-
-
 def main():
-    logger.info("Hello, world!")
+    print("Hello, world!")
 
 
 if __name__ == "__main__":
