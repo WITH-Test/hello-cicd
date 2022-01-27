@@ -10,8 +10,11 @@ version: 0.2
 
 phases:
   install:
+    runtime-versions:
+      python: 3.10
     commands:
       - echo Entered the install phase...
+      - pip install poetry
     finally:
       - echo This always runs even if the update or install command fails
   pre_build:
@@ -31,11 +34,8 @@ phases:
       - echo Build completed on `date`
 
 reports:
-  arn:aws:codebuild:eu-west-3:your-aws-account-id:report-group/report-group-name-1:
+  arn:aws:codebuild:eu-west-3:988760979462:wow-report-group:
     files:
       - "**/*"
-    base-directory: 'target/tests/reports'
-    discard-paths: no
-cache:
-  paths:
-    - '/root/.m2/**/*'
+    base-directory: 'tests/reports'
+    file-format: JUNITXML
