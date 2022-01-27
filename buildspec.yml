@@ -37,5 +37,5 @@ reports:
   wow-report-group:
     files:
       - "**/*"
-    base-directory: 'tests/reports'
+    base-directory: 'reports'
     file-format: JUNITXML
