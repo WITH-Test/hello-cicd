@@ -34,7 +34,7 @@ phases:
       - echo Build completed on `date`
 
 reports:
-  arn:aws:codebuild:eu-west-3:988760979462:wow-report-group:
+  wow-report-group:
     files:
       - "**/*"
     base-directory: 'tests/reports'
