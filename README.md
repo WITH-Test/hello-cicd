@@ -1,3 +1,5 @@
+![](https://codebuild.eu-west-3.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiejBhcWh3dGI5REVyRmxWUHh1VHpKRWxsRXVRMFpabkJqMitHSkxFd2JrUzhVZjhSRlRTVGZmczMxYklRUWlaWEJydHZIOExZL1hmdVAzdC93RUFZaWlZPSIsIml2UGFyYW1ldGVyU3BlYyI6Iis3VTMwSGZiUTFOR0ZMS0kiLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
+
 # Mirror repos test
 
 This file should automagically be committed to AWS CodeCommit.
