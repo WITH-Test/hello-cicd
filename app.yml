@@ -1,0 +1,14 @@
+version: '3'
+
+volumes:
+  aws_django_local_postgres_data: {}
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./build/django/Dockerfile
+    image: hello_aws_django
+    command: /start
+    ports:
+      - 5000:5000
