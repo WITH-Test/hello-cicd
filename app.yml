@@ -7,7 +7,7 @@ services:
   django:
     build:
       context: .
-      dockerfile: ./build/django/Dockerfile
+      dockerfile: ./Dockerfile
     image: hello_aws_django
     command: /start
     ports:

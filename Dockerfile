@@ -66,6 +66,4 @@ USER django
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN python -c "import sys; print(sys.executable)"
-
 ENTRYPOINT ["/entrypoint"]
