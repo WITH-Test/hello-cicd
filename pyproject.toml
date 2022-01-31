@@ -10,10 +10,12 @@ Django = "^4.0.1"
 gunicorn = "^20.1.0"
 
 [tool.poetry.dev-dependencies]
+isort = "^5.10.1"
+black = "^22.1.0"
 
-[tool.poetry.scripts]
-carlos = 'repo-mirroring:main'
+[tool.isort]
+profile = "black"
 
 [build-system]
-requires = ["poetry-core@https://github.com/python-poetry/poetry-core/archive/325312c016d69189ac93c945ba0c1b69296c5e54.zip"]
+requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

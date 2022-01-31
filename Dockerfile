@@ -4,7 +4,7 @@ ARG PYTHON_VERSION=3.9-slim-bullseye
 FROM python:${PYTHON_VERSION} as python
 
 # Python build stage
-FROM python AS compile-image
+FROM python AS build-image
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential gcc libpq-dev gettext \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
@@ -29,7 +29,7 @@ RUN pip install poetry && poetry config virtualenvs.create false && poetry insta
 #RUN pip install .
 
 
-FROM python AS build-image
+FROM python AS runtime-image
 COPY --from=compile-image /opt/venv /opt/venv
 
 ENV PYTHONFAULTHANDLER=1 \
