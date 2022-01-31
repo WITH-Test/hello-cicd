@@ -30,7 +30,7 @@ RUN pip install poetry && poetry config virtualenvs.create false && poetry insta
 
 
 FROM python AS runtime-image
-COPY --from=compile-image /opt/venv /opt/venv
+COPY --from=build-image /opt/venv /opt/venv
 
 ENV PYTHONFAULTHANDLER=1 \
   PYTHONUNBUFFERED=1 \
