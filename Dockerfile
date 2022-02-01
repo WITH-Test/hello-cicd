@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.9-bullseye
+ARG PYTHON_VERSION=3.9-slim-bullseye
 #yolo
 
 # define an alias for the specfic python version used in this file.
