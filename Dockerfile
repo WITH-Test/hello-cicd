@@ -1,4 +1,5 @@
 ARG PYTHON_VERSION=3.9-bullseye
+#yolo
 
 # define an alias for the specfic python version used in this file.
 FROM python:${PYTHON_VERSION} as python
@@ -65,6 +66,7 @@ WORKDIR ${APP_HOME}
 USER django
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
+RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 

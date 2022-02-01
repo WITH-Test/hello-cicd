@@ -11,4 +11,4 @@ services:
     image: hello_aws_django
     command: /start
     ports:
-      - 5000:5000
+      - 5000:8000
