@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.9-slim-bullseye
+ARG PYTHON_VERSION=3.9-bullseye
 
 # define an alias for the specfic python version used in this file.
 FROM python:${PYTHON_VERSION} as python
@@ -65,5 +65,7 @@ WORKDIR ${APP_HOME}
 USER django
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
+
+EXPOSE 8000
 
 ENTRYPOINT ["/entrypoint"]
