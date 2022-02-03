@@ -67,8 +67,8 @@ version: 0.2
 
 env:
     variables:
-      CONTAINER_REPOSITORY_URL: 988760979462.dkr.ecr.eu-west-3.amazonaws.com/wow-test
-      TAG_NAME: latest
+      REPOSITORY_URI: 988760979462.dkr.ecr.eu-west-3.amazonaws.com/wow-test
+
 
 phases:
   install:
@@ -78,19 +78,30 @@ phases:
   pre_build:
     commands:
     - $(aws ecr get-login --no-include-email)
-    - docker pull $CONTAINER_REPOSITORY_URL:build-image || true
-    - docker pull $CONTAINER_REPOSITORY_URL:$TAG_NAME || true
+    - docker pull $REPOSITORY_URI:build-image || true
+    - docker pull $REPOSITORY_URI:latest || true
+    - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+    - IMAGE_TAG=${COMMIT_HASH:=latest}
     
   build:
     commands:
-    - docker build --target build-image --cache-from $CONTAINER_REPOSITORY_URL:build-image --tag $CONTAINER_REPOSITORY_URL:build-image .
-    - docker build --target runtime-image --cache-from $CONTAINER_REPOSITORY_URL:build-image --cache-from $CONTAINER_REPOSITORY_URL:$TAG_NAME --tag $CONTAINER_REPOSITORY_URL:$TAG_NAME .
+    - echo "Building base image"
+    - time docker build --target build-image --cache-from $REPOSITORY_URI:build-image --tag $REPOSITORY_URI:build-image .
+    - echo "Building runtime image"
+    - time docker build --target runtime-image --cache-from $REPOSITORY_URI:build-image --cache-from $REPOSITORY_URI:latest --tag $REPOSITORY_URI:latest .
+    - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
 
   post_build:
     commands:
-    - docker push $CONTAINER_REPOSITORY_URL:build-image
-    - docker push $CONTAINER_REPOSITORY_URL:$TAG_NAME
+    - docker push $REPOSITORY_URI:build-image
+    - docker push $REPOSITORY_URI:$IMAGE_TAG
+    - echo Writing image definitions file...
+    - printf '[{"name":"{{container_name_in_task_definition}}","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json
 ```
+
+Making sure to put the right name in the last command.
 
 ## CodePipeline
 
