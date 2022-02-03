@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -o errexit
-set -o pipefail
-set -o nounset
-
-
-gunicorn --log-file - --threads 10 --bind 0.0.0.0:8000 --chdir=/app hello_aws.wsgi

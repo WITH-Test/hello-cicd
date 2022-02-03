@@ -46,15 +46,6 @@ ARG APP_HOME=/app
 RUN addgroup --system django \
     && adduser --system --ingroup django django
 
-COPY --chown=django:django ./build/django/scripts/entrypoint /entrypoint
-RUN sed -i 's/\r$//g' /entrypoint
-RUN chmod +x /entrypoint
-
-COPY --chown=django:django ./build/django/scripts/start /start
-RUN sed -i 's/\r$//g' /start
-RUN chmod +x /start
-
-
 # copy application code to WORKDIR
 COPY --chown=django:django ./hello_aws ${APP_HOME}
 
@@ -70,5 +61,4 @@ RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-ENTRYPOINT ["/entrypoint"]
-CMD ["/start"]
+CMD ["gunicorn", "--log-file", "-", "--threads", "10", "--bind", "0.0.0.0:8000", "--chdir=/app", "hello_aws.wsgi"]
