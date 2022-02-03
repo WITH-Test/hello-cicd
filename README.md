@@ -105,4 +105,18 @@ Using profile wowadmin (IAM administrator user)
 $ export REGION=eu-west-3; export AWS_ACCOUNT_ID=988760979462; export ECR_REPO_NAME=wow-test
 $ aws ecr get-login-password --region $REGION --profile wowadmin | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
 $ docker pull $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/${ECR_REPO_NAME}:latest
+$ docker run -p 8000:8000 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/${ECR_REPO_NAME}:latest  # runs on port 8000
 ```
+
+## CodeDeploy to AWS Fargate
+
+Let's try to run the image in EC2 Spot instances after the build.
+
+Resources:
+[Spot EC2 + Lambda + CW Events](https://aws.amazon.com/blogs/devops/automatic-deployment-to-new-amazon-ec2-on-demand-and-spot-instances-using-aws-codedeploy-amazon-cloudwatch-events-and-aws-lambda/) (seems outdated)
+
+[Create ECS Cluster](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-ec2-cluster-console-v2.html)
+
+[Create ECS Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service-console-v2.html)
+
+For the task running on the VPC to be able to pull the image we just published, we need to [configure networking](https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-networking.html) on the task, and configure endpoints in [ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/vpc-endpoints.html) and [ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/vpc-endpoints.html). This is called AWS PrivateLink, and needs be [set up](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html)
