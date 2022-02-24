@@ -1,0 +1,33 @@
+{
+    "LoadBalancers": [
+        {
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:eu-west-3:988760979462:loadbalancer/app/wow-very-balanced/0c1d4f65ecb7f3d7",
+            "DNSName": "wow-very-balanced-319212515.eu-west-3.elb.amazonaws.com",
+            "CanonicalHostedZoneId": "Z3Q77PNBQS71R4",
+            "CreatedTime": "2022-02-07T09:17:40.340000+00:00",
+            "LoadBalancerName": "wow-very-balanced",
+            "Scheme": "internet-facing",
+            "VpcId": "vpc-09b70a7935012cb6a",
+            "State": {
+                "Code": "provisioning"
+            },
+            "Type": "application",
+            "AvailabilityZones": [
+                {
+                    "ZoneName": "eu-west-3b",
+                    "SubnetId": "subnet-0847b289ec1ae3a5f",
+                    "LoadBalancerAddresses": []
+                },
+                {
+                    "ZoneName": "eu-west-3a",
+                    "SubnetId": "subnet-0c0da6b966bc12eab",
+                    "LoadBalancerAddresses": []
+                }
+            ],
+            "SecurityGroups": [
+                "sg-080088ee8430f9ce8"
+            ],
+            "IpAddressType": "ipv4"
+        }
+    ]
+}

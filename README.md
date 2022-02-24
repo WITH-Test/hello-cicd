@@ -78,7 +78,7 @@ phases:
   pre_build:
     commands:
     - $(aws ecr get-login --no-include-email)
-    - docker pull $REPOSITORY_URI:build-image || true
+    - docker pull $REPOSITORY_URI:build-image || true  # pull the image
     - docker pull $REPOSITORY_URI:latest || true
     - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
     - IMAGE_TAG=${COMMIT_HASH:=latest}
@@ -95,13 +95,14 @@ phases:
     commands:
     - docker push $REPOSITORY_URI:build-image
     - docker push $REPOSITORY_URI:$IMAGE_TAG
+    - docker push $REPOSITORY_URI:latest
     - echo Writing image definitions file...
     - printf '[{"name":"{{container_name_in_task_definition}}","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
 ```
 
-Making sure to put the right name in the last command.
+Making sure to put the right name in the last command, that will put a file in the S3, pointing to the image that was just pushed.
 
 ## CodePipeline
 
@@ -121,7 +122,9 @@ $ docker run -p 8000:8000 $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/${ECR_RE
 
 ## CodeDeploy to AWS Fargate
 
-Let's try to run the image in EC2 Spot instances after the build.
+~~Let's try to run the image in EC2 Spot instances after the build.~~
+
+(Note: Fargate does the managing of the instances. Spot instances are to be managed manually in the EC2 section. I think)
 
 Resources:
 [Spot EC2 + Lambda + CW Events](https://aws.amazon.com/blogs/devops/automatic-deployment-to-new-amazon-ec2-on-demand-and-spot-instances-using-aws-codedeploy-amazon-cloudwatch-events-and-aws-lambda/) (seems outdated)
@@ -130,4 +133,18 @@ Resources:
 
 [Create ECS Service](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service-console-v2.html)
 
-For the task running on the VPC to be able to pull the image we just published, we need to [configure networking](https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-task-networking.html) on the task, and configure endpoints in [ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/vpc-endpoints.html) and [ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/vpc-endpoints.html). This is called AWS PrivateLink, and needs be [set up](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html)
+For the task running on the VPC to be able to pull the image we just published, we need to give it permissions, with a role. See [tutorial](https://docs.aws.amazon.com/codepipeline/latest/userguide/ecs-cd-pipeline.html).
+
+# Accessing the new application over the internet
+
+[Create a LB and Target Group](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/tutorial-application-load-balancer-cli.html):
+
+```bash
+$ aws --profile wowadmin elbv2 create-load-balancer --name wow-very-balanced --subnets subnet-<zone-3a> subnet-<zone-3b> --security-groups sg-<vpc-group>
+$ aws --profile wowadmin elbv2 create-target-group --name wow-hello-aws-target --protocol HTTP --port 80 --vpc-id vpc-<vpcId> --ip-address-type ipv4
+```
+
+That returned [this](docs/lb_create.json) and [this](docs/tg_create.json).
+
+
+https://aws.amazon.com/blogs/containers/new-using-amazon-ecs-exec-access-your-containers-fargate-ec2/
