@@ -5,4 +5,4 @@ from django.shortcuts import render
 
 
 def hello_view(request):
-    return JsonResponse({"message": f"Hello, AWS!"})
+    return JsonResponse({"message": f"Hello, DogeOps!"})
