@@ -1,0 +1,47 @@
+version: 0.2
+
+env:
+    shell: bash
+    variables:
+      REPOSITORY_URI: 988760979462.dkr.ecr.eu-west-3.amazonaws.com/wow-test
+      APP_NAME: django-much-app
+      TASK_FAMILY: first-run-task-definition
+      CLUSTER_NAME: default
+      SERVICE_NAME: custom-service
+
+phases:
+  install:
+    runtime-versions:
+      docker: 19
+
+  pre_build:
+    commands:
+    - $(aws ecr get-login --no-include-email)
+    - docker pull $REPOSITORY_URI:build-image || true
+    - docker pull $REPOSITORY_URI:latest || true
+    - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+    - IMAGE_TAG=${COMMIT_HASH:=latest}
+
+  build:
+    commands:
+    - echo "Building base image"
+    - time docker build --target build-image --cache-from $REPOSITORY_URI:build-image --tag $REPOSITORY_URI:build-image .
+    - echo "Building runtime image"
+    - time docker build --target runtime-image --cache-from $REPOSITORY_URI:build-image --cache-from $REPOSITORY_URI:latest --tag $REPOSITORY_URI:$IMAGE_TAG .
+    - docker tag $REPOSITORY_URI:$IMAGE_TAG $REPOSITORY_URI:latest
+
+  post_build:
+    commands:
+    - docker push $REPOSITORY_URI:build-image
+    - docker push $REPOSITORY_URI:$IMAGE_TAG
+    - docker push $REPOSITORY_URI:latest
+    - echo Writing image definitions file...
+    - printf '[{"name":"%s","imageUri":"%s"}]' $APP_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+#    - CONTAINER_DEFINITION_FILE=$(cat ${BASE_NAME}-$SERVICE_ID.container-definition.json)
+#    - export TASK_VERSION=$(aws ecs register-task-definition --family ${TASK_FAMILY} --container-definitions "$CONTAINER_DEFINITION" | jq --raw-output '.taskDefinition.revision')
+#    - echo "Registered ECS Task Definition: " $TASK_VERSION
+    - DEPLOYED_SERVICE=$(aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --task-definition $TASK_FAMILY | jq --raw-output '.service.serviceName')
+    - echo "Deployment of $DEPLOYED_SERVICE complete"
+
+artifacts:
+    files: imagedefinitions.json

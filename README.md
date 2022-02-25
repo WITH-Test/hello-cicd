@@ -58,49 +58,7 @@ See [Multi Stage](docs/multi_stage.md)
 See [AWS CLI](docs/aws_cli.md)
 
 
-CodeBuild: new build from CC repo, define buildspec in UI editor
-
-`buildspec.yml`:
-
-```yaml
-version: 0.2
-
-env:
-    variables:
-      REPOSITORY_URI: 988760979462.dkr.ecr.eu-west-3.amazonaws.com/wow-test
-
-
-phases:
-  install:
-    runtime-versions:
-      docker: 19
-  
-  pre_build:
-    commands:
-    - $(aws ecr get-login --no-include-email)
-    - docker pull $REPOSITORY_URI:build-image || true  # pull the image
-    - docker pull $REPOSITORY_URI:latest || true
-    - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-    - IMAGE_TAG=${COMMIT_HASH:=latest}
-    
-  build:
-    commands:
-    - echo "Building base image"
-    - time docker build --target build-image --cache-from $REPOSITORY_URI:build-image --tag $REPOSITORY_URI:build-image .
-    - echo "Building runtime image"
-    - time docker build --target runtime-image --cache-from $REPOSITORY_URI:build-image --cache-from $REPOSITORY_URI:latest --tag $REPOSITORY_URI:latest .
-    - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-
-  post_build:
-    commands:
-    - docker push $REPOSITORY_URI:build-image
-    - docker push $REPOSITORY_URI:$IMAGE_TAG
-    - docker push $REPOSITORY_URI:latest
-    - echo Writing image definitions file...
-    - printf '[{"name":"{{container_name_in_task_definition}}","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-artifacts:
-    files: imagedefinitions.json
-```
+CodeBuild: new build from CC repo, define [buildspec.yml](docs/buildspec.yml) in UI editor
 
 Making sure to put the right name in the last command, that will put a file in the S3, pointing to the image that was just pushed.
 
