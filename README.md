@@ -70,7 +70,6 @@ CodeBuild does not trigger builds automatically, it's only the configuration ste
 
 Using profile wowadmin (IAM administrator user)
 
-
 ```bash
 $ export REGION=eu-west-3; export AWS_ACCOUNT_ID=988760979462; export ECR_REPO_NAME=wow-test
 $ aws ecr get-login-password --region $REGION --profile wowadmin | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com
@@ -106,3 +105,10 @@ That returned [this](docs/lb_create.json) and [this](docs/tg_create.json).
 
 
 https://aws.amazon.com/blogs/containers/new-using-amazon-ecs-exec-access-your-containers-fargate-ec2/
+
+## Restart the wizard
+
+I was getting lost in all of the above, since it wasn't working. I restarted from scratch, setting all options as defaults 
+and setting the target to `FARGATE`. Updated `buildspec.yml` to force a redeploy of the task. 
+I needed to add a [new policy to update the ECS service](https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html)
+to the `wow-code-commit` user.
