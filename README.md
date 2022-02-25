@@ -111,4 +111,4 @@ https://aws.amazon.com/blogs/containers/new-using-amazon-ecs-exec-access-your-co
 I was getting lost in all of the above, since it wasn't working. I restarted from scratch, setting all options as defaults 
 and setting the target to `FARGATE`. Updated `buildspec.yml` to force a redeploy of the task. 
 I needed to add a [new policy to update the ECS service](https://docs.aws.amazon.com/AmazonECS/latest/userguide/security_iam_id-based-policy-examples.html)
-to the `wow-code-commit` user.
+to the `CodeBuildDockerCacheRole` role.
