@@ -40,7 +40,7 @@ phases:
 #    - CONTAINER_DEFINITION_FILE=$(cat ${BASE_NAME}-$SERVICE_ID.container-definition.json)
 #    - export TASK_VERSION=$(aws ecs register-task-definition --family ${TASK_FAMILY} --container-definitions "$CONTAINER_DEFINITION" | jq --raw-output '.taskDefinition.revision')
 #    - echo "Registered ECS Task Definition: " $TASK_VERSION
-    - DEPLOYED_SERVICE=$(aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --task-definition $TASK_FAMILY | jq --raw-output '.service.serviceName')
+    - DEPLOYED_SERVICE=$(aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --task-definition $TASK_FAMILY --force-new-deployment | jq --raw-output '.service.serviceName')
     - echo "Deployment of $DEPLOYED_SERVICE complete"
 
 artifacts:
