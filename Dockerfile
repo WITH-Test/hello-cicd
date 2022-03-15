@@ -2,7 +2,7 @@ ARG PYTHON_VERSION=3.9-slim-bullseye
 #yolo
 
 # define an alias for the specfic python version used in this file.
-FROM python:${PYTHON_VERSION} as python
+FROM with-base as python
 
 # Python build stage
 FROM python AS build-image
@@ -17,8 +17,8 @@ RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
 # Don't buffer and don't write bytecode
-ENV PYTHONUNBUFFERED 1
-ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
 COPY pyproject.toml .
 COPY poetry.lock .
