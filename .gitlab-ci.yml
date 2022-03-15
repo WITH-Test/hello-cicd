@@ -1,11 +1,11 @@
 stages:
-  - test
+  - check
 
 include:
   - template: Code-Quality.gitlab-ci.yml
 
 code_quality:
-  stage: test
+  stage: check
   artifacts:
     expose_as: 'Code Quality Report'
     paths: [gl-code-quality-report.json]
