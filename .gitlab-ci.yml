@@ -6,6 +6,7 @@ include:
 
 code_quality:
   stage: style
+  allow_failure: true
   artifacts:
     expose_as: 'Code Quality Report'
     paths: [gl-code-quality-report.json]
