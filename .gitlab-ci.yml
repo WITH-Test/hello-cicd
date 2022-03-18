@@ -1,6 +1,7 @@
 stages:
 - style
 - build
+- test
 
 include:
 - project: 'wow-team2/ci-quality-gates'
@@ -9,5 +10,8 @@ include:
 
 code_quality:
   stage: style
+
+debug:
+  stage: test
   script:
-  - ls -la
+    - ls -la
