@@ -1,17 +1,11 @@
 stages:
 - style
 - build
-- test
 
 include:
 - project: 'wow-team2/ci-quality-gates'
   ref: main
-  file: '/.gitlab-ci.yml'
+  file: '/Code-Quality.gitlab-ci.yml'
 
 code_quality:
   stage: style
-
-debug:
-  stage: test
-  script:
-    - ls -la
