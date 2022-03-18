@@ -5,3 +5,8 @@ include:
 - project: 'wow-team2/ci-quality-gates'
   ref: main
   file: '/.gitlab-ci.yml'
+
+code_quality:
+  stage: style
+  script:
+  - ls -la
