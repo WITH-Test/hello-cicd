@@ -1,7 +1,7 @@
-[![pipeline status](https://gitlab.com/with-madrid/wow/hello-aws/badges/main/pipeline.svg)](https://gitlab.com/with-madrid/wow/hello-aws/-/pipelines)
-[![coverage report](https://gitlab.com/with-madrid/wow/hello-aws/badges/main/coverage.svg)](https://gitlab.com/with-madrid/wow/hello-aws/-/commits/main)
-![](https://codebuild.eu-west-3.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoid1d4WlJZeHlxa0s2TXdXeFUvc0d2LzlNODBQYzVtVGRGUUNTYk45YVVKRjVTNCs5M2pUSDNRTWk1MFdKY014bDhjUEdNbnJxU3E2TVc0OGtPcVhSL1p3PSIsIml2UGFyYW1ldGVyU3BlYyI6ImpVRHFKUlZweUhkdnVIZG4iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)
-[![Latest Release](https://gitlab.com/with-madrid/wow/hello-aws/-/badges/release.svg)](https://gitlab.com/with-madrid/wow/hello-aws/-/releases)
+[![pipeline status](https://gitlab.com/with-madrid/wow/hello-aws/badges/main/pipeline.svg)](https://gitlab.com/with-madrid/wow/hello-aws/-/pipelines "pipeline status")
+[![coverage report](https://gitlab.com/with-madrid/wow/hello-aws/badges/main/coverage.svg)](https://gitlab.com/with-madrid/wow/hello-aws/-/commits/main "coverage report")
+[![latest release](https://gitlab.com/with-madrid/wow/hello-aws/-/badges/release.svg)](https://gitlab.com/with-madrid/wow/hello-aws/-/releases "latest release")
+[![build status](https://codebuild.eu-west-3.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoid1d4WlJZeHlxa0s2TXdXeFUvc0d2LzlNODBQYzVtVGRGUUNTYk45YVVKRjVTNCs5M2pUSDNRTWk1MFdKY014bDhjUEdNbnJxU3E2TVc0OGtPcVhSL1p3PSIsIml2UGFyYW1ldGVyU3BlYyI6ImpVRHFKUlZweUhkdnVIZG4iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=main)](https://eu-west-3.console.aws.amazon.com/codesuite/codebuild/988760979462/projects/SampleDockerCacheProject/history?region=eu-west-3&builds-meta=eyJmIjp7InRleHQiOiIifSwicyI6e30sIm4iOjIwLCJpIjowfQ "build status")
 # Setting up GitLab + CodeCommit
 
 - create AWS Account under WITH organization: wow+aws@wadrid.com
