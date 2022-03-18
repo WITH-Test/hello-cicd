@@ -1,5 +1,6 @@
 stages:
 - style
+- build
 
 include:
 - project: 'wow-team2/ci-quality-gates'
