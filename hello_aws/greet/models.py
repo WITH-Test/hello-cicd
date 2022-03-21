@@ -1,5 +1,5 @@
 """
-Docstrings in modules are checked by pylint, in GitLab CI.
+Docstrings in modules are checked by pylint, in GitLab CI
 """
 from django.db import models
 
