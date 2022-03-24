@@ -10,7 +10,7 @@ jobs:
       DEPENDENCY_MANAGER: 'poetry'
       ENABLE_SONAR: ${{ false }}
       ENABLE_CODE_CLIMATE: ${{ false }}
-      ENABLE_SLACK: ${{ false }}
+      ENABLE_SLACK: ${{ true }}
       ENFORCE_PYLINT: ${{ false }}
       ENFORCE_BLACK: ${{ true }}
       ENFORCE_FLAKE8: ${{ false }}
