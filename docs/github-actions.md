@@ -15,3 +15,5 @@ Create a base public repo, `.github`, for the Organization:
 
 Everything is handled in separate repositories, that can make use of each other.
 
+Testing [this](https://github.com/MartinHeinz/workflows/blob/v1.0.0/.github/workflows/python-container-ci.yml) from [here](https://dev.to/martinheinz/ultimate-ci-pipeline-for-all-of-your-python-projects-2ob8)
+
