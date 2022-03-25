@@ -4,7 +4,7 @@ on: [push, workflow_dispatch]
 
 jobs:
   python-ci-pipeline:
-    uses: WITH-Test/workflows/reusable/python-container-ci.yml@main
+    uses: WITH-Test/workflows/.github/workflows/python-container-ci.yml@main
     with:
       project-folder: api
       PYTHON_VERSION: '3.10'
