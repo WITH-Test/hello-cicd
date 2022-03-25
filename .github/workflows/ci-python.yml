@@ -3,10 +3,10 @@ name: CI Pipeline
 on: [push, workflow_dispatch]
 
 jobs:
-  defaults:
-    run:
-      working-directory: api
   python-ci-pipeline:
+    defaults:
+      run:
+        working-directory: api
     uses: MartinHeinz/workflows/.github/workflows/python-container-ci.yml@v1.0.0
     with:
       PYTHON_VERSION: '3.10'
