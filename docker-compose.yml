@@ -1,13 +1,20 @@
-version: '3'
-
-volumes:
-  aws_django_local_postgres_data: {}
+version: '3.8'
 
 services:
   api:
     build:
-      context: .
+      context: ./api
       dockerfile: ./Dockerfile
     image: hello_aws_django
     ports:
-      - 5000:8000
+      - 8000:8000
+
+  front:
+    build:
+      context: ./front
+      dockerfile: ./Dockerfile
+    image: hello_aws_nuxt
+    depends_on:
+      - api
+    ports:
+      - 3000:3000
