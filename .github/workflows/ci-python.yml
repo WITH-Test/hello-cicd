@@ -4,11 +4,9 @@ on: [push, workflow_dispatch]
 
 jobs:
   python-ci-pipeline:
-    defaults:
-      run:
-        working-directory: api
-    uses: MartinHeinz/workflows/.github/workflows/python-container-ci.yml@v1.0.0
+    uses: WITH-Test/workflows/reusable/python-container-ci.yml@main
     with:
+      project-folder: api
       PYTHON_VERSION: '3.10'
       DEPENDENCY_MANAGER: 'poetry'
       ENABLE_SONAR: ${{ false }}
