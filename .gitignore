@@ -1,7 +1,5 @@
-.python-version
 .idea/
-.env
-__pycache__
-.scannerwork
+**/.env
+**/.env.*.local
 
 **/*.sqlite3

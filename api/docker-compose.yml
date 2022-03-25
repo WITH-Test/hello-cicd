@@ -4,11 +4,10 @@ volumes:
   aws_django_local_postgres_data: {}
 
 services:
-  django:
+  api:
     build:
       context: .
       dockerfile: ./Dockerfile
     image: hello_aws_django
-    command: /start
     ports:
       - 5000:8000
