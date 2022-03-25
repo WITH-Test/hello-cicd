@@ -7,6 +7,7 @@ jobs:
     uses: WITH-Test/workflows/.github/workflows/python-container-ci.yml@main
     with:
       project-folder: api
+      runs_on: 'ubuntu-latest'
       PYTHON_VERSION: '3.10'
       DEPENDENCY_MANAGER: 'poetry'
       ENABLE_SONAR: ${{ false }}
