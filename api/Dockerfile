@@ -32,23 +32,26 @@ ENV PYTHONFAULTHANDLER=1 \
   PIP_DISABLE_PIP_VERSION_CHECK=on \
   PIP_DEFAULT_TIMEOUT=100
 
-ARG APP_HOME=/app
+ARG APP_HOME=/app/
+ARG APP_SRC=.
+ARG APP_USER=django
 
 # add a user for the application
-RUN addgroup --system django \
-    && adduser --system --ingroup django django \
+RUN addgroup --system ${APP_USER} \
+    && adduser --system --ingroup ${APP_USER} ${APP_USER} \
     && mkdir -p ${APP_HOME} \
-  # make django owner of the WORKDIR directory as well.
-    && chown django:django ${APP_HOME}
+    # make APP_USER owner of the WORKDIR directory as well.
+    && chown ${APP_USER}:${APP_USER} ${APP_HOME}
 
 WORKDIR ${APP_HOME}
 
 # copy application code to WORKDIR
-COPY --chown=django:django hello_aws ${APP_HOME}
+COPY --chown=${APP_USER}:${APP_USER} ${APP_SRC} ${APP_HOME}
 
-USER django
+USER ${APP_USER}
+RUN ls -la
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["gunicorn", "--log-file", "-", "--threads", "10", "--bind", "0.0.0.0:8000", "--chdir=/app", "hello_aws.wsgi"]
+CMD ["gunicorn", "--log-file", "-", "--threads", "10", "--bind", "0.0.0.0:8000", "hello_aws.wsgi"]
