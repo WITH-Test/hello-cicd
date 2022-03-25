@@ -1,4 +1,4 @@
-name: ci
+name: Nuxt 2
 
 on: [push, workflow_dispatch]
 
