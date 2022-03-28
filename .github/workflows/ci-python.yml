@@ -9,7 +9,8 @@ jobs:
       project-folder: api
       PYTHON_VERSION: '3.9'
       DEPENDENCY_MANAGER: 'poetry'
-      ENFORCE_PYLINT: ${{ false }}
+      ENFORCE_ISORT: ${{ true }}
       ENFORCE_BLACK: ${{ true }}
       ENFORCE_FLAKE8: ${{ false }}
+      ENFORCE_PYLINT: ${{ false }}
       ENFORCE_BANDIT: ${{ false }}
