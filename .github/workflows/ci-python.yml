@@ -3,7 +3,15 @@ name: Python
 on: [push, workflow_dispatch]
 
 jobs:
+
+  project-changed:
+    uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
+    with:
+      project-folder: ./api
+
   lint:
+    needs: project-changed
+    if: needs.project-changed.outputs.changed == 'true'
     uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
       project-folder: api

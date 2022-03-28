@@ -3,7 +3,14 @@ name: Nuxt 2
 on: [push, workflow_dispatch]
 
 jobs:
+  project-changed:
+    uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
+    with:
+      project-folder: ./front
+
   ci:
+    needs: project-changed
+    if: needs.project-changed.outputs.changed == 'true'
     defaults:
       run:
         working-directory: ./front
