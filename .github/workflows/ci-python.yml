@@ -3,17 +3,13 @@ name: Python
 on: [push, workflow_dispatch]
 
 jobs:
-  python-ci-pipeline:
-    uses: WITH-Test/workflows/.github/workflows/python-container-ci.yml@main
+  lint:
+    uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
       project-folder: api
-      PYTHON_VERSION: '3.10'
+      PYTHON_VERSION: '3.9'
       DEPENDENCY_MANAGER: 'poetry'
-      ENABLE_SONAR: ${{ false }}
-      ENABLE_CODE_CLIMATE: ${{ false }}
-      ENABLE_SLACK: ${{ false }}
       ENFORCE_PYLINT: ${{ false }}
       ENFORCE_BLACK: ${{ true }}
       ENFORCE_FLAKE8: ${{ false }}
       ENFORCE_BANDIT: ${{ false }}
-      ENFORCE_DIVE: ${{ false }}
