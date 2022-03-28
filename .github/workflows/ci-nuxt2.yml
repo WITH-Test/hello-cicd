@@ -3,14 +3,15 @@ name: Nuxt 2
 on: [push, workflow_dispatch]
 
 jobs:
-  project-changed:
-    uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
-    with:
-      project-folder: front
+#  project-changed:
+#    uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
+#    with:
+#      project-folder: front
 
-  ci:
-    needs: project-changed
-    if: needs.project-changed.outputs.changed == 'true'
+  nuxt:
+#    needs: project-changed
+#    if: needs.project-changed.outputs.changed == 'true'
+    id: nuxt
     defaults:
       run:
         working-directory: ./front
@@ -48,3 +49,10 @@ jobs:
 
       - name: Run tests 🧪
         run: npm run test
+#
+#  build-image:
+#    needs: nuxt
+#    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+#    uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
+#    with:
+#      container_repository: ${{github.event.inputs.}}
