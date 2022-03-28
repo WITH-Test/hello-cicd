@@ -6,7 +6,7 @@ jobs:
   project-changed:
     uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
     with:
-      project-folder: ./front
+      project-folder: front
 
   ci:
     needs: project-changed
