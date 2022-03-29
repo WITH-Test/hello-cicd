@@ -51,4 +51,4 @@ jobs:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
     with:
-      container_repository: ${{github.event.inputs.}}
+      project-folder: front
