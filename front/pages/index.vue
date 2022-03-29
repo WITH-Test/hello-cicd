@@ -1,8 +1,8 @@
 <template>
   <section class="section">
     <div class="columns is-mobile">
-      <card title="Free" icon="github">
-        Open source on <a href="https://github.com/buefy/buefy"> GitHub </a>
+      <card title="CICD" icon="github">
+        Source code on <a href="https://github.com/WITH-Test/hello-cicds"> GitHub </a>
       </card>
 
       <card title="Responsive" icon="cellphone-link">
