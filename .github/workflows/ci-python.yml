@@ -7,22 +7,15 @@ on:
   workflow_dispatch: {}
 
 jobs:
-
-#  project-changed:
-#    uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
-#    with:
-#      project-folder: api
-
   lint:
-#    needs: project-changed
-#    if: needs.project-changed.outputs.changed == 'true'
     uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
       project-folder: api
-      PYTHON_VERSION: '3.9'
       DEPENDENCY_MANAGER: 'poetry'
-      ENFORCE_ISORT: ${{ true }}
-      ENFORCE_BLACK: ${{ true }}
-      ENFORCE_FLAKE8: ${{ false }}
-      ENFORCE_PYLINT: ${{ false }}
-      ENFORCE_BANDIT: ${{ false }}
+
+  build-image:
+    needs: lint
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
+    with:
+      project-folder: api
