@@ -2,7 +2,7 @@
   <section class="section">
     <div class="columns is-mobile">
       <card title="CICD" icon="github">
-        Source code on <a href="https://github.com/WITH-Test/hello-cicds"> GitHub </a>
+        Source code on <a href="https://github.com/WITH-Test/hello-cicd"> GitHub </a>
       </card>
 
       <card title="Responsive" icon="cellphone-link">
