@@ -1,6 +1,10 @@
 name: Python
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    paths:
+      - "api/**"
+  workflow_dispatch: {}
 
 jobs:
 

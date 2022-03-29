@@ -1,16 +1,13 @@
 name: Nuxt 2
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    paths:
+      - "front/**"
+  workflow_dispatch: {}
 
 jobs:
-#  project-changed:
-#    uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
-#    with:
-#      project-folder: front
-
   nuxt:
-#    needs: project-changed
-#    if: needs.project-changed.outputs.changed == 'true'
     id: nuxt
     defaults:
       run:
