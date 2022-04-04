@@ -6,11 +6,14 @@ on:
       - "front/**"
   workflow_dispatch: {}
 
+env:
+  WORKDIR: front
+
 jobs:
   nuxt:
     defaults:
       run:
-        working-directory: ./front
+        working-directory: ${{ env.WORKDIR }}
 
     runs-on: ${{ matrix.os }}
 
@@ -21,16 +24,17 @@ jobs:
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
 
       - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3
+        id: cache
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -38,6 +42,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies 👨🏻‍💻
+        if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci --prefer-offline --no-audit
 
       - name: Run linter 👀
@@ -51,4 +56,4 @@ jobs:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
     with:
-      project-folder: front
+      project-folder: ${{ env.WORKDIR }}
