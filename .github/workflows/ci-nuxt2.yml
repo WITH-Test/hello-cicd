@@ -56,4 +56,4 @@ jobs:
     with:
       project-folder: front
       container_registry: 'ecr'
-      container_repository_uri: '988760979462.dkr.ecr.eu-west-3.amazonaws.com/hello-cicd-api'
+      container_repository_uri: '988760979462.dkr.ecr.eu-west-3.amazonaws.com/hello-cicd'  # will be suffixed
