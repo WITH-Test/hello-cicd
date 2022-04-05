@@ -7,7 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ORG_SECRET: ${{ secrets.GHA_ORG_SECRET }}
+      REPO_SECRET: ${{ secrets.GHA_REPO_SECRET }}
     steps:
     - name: Check ORG secret
       run: |
         echo ${{ env.ORG_SECRET }}
+        echo ${{ env.REPO_SECRET }}
