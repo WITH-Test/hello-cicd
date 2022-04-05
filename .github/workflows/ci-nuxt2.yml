@@ -52,7 +52,7 @@ jobs:
     needs: nuxt
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
-    env:
+    secrets:
       AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
     with:
       project-folder: front
