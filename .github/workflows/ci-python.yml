@@ -6,14 +6,11 @@ on:
       - "api/**"
   workflow_dispatch:
 
-env:
-  WORKDIR: api
-
 jobs:
   lint:
     uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
-      project-folder: ${{ env.WORKDIR }}
+      project-folder: api
       DEPENDENCY_MANAGER: 'poetry'
 
   build-image:
@@ -21,6 +18,6 @@ jobs:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
     with:
-      project-folder: ${{ env.WORKDIR }}
+      project-folder: api
       container_registry: 'ecr'
       container_repository_uri: '988760979462.dkr.ecr.eu-west-3.amazonaws.com/hello-cicd-api'

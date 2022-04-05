@@ -6,14 +6,11 @@ on:
       - "front/**"
   workflow_dispatch:
 
-env:
-  WORKDIR: front
-
 jobs:
   nuxt:
     defaults:
       run:
-        working-directory: ${{ env.WORKDIR }}
+        working-directory: front
 
     runs-on: ${{ matrix.os }}
 
@@ -56,6 +53,6 @@ jobs:
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
     with:
-      project-folder: ${{ env.WORKDIR }}
+      project-folder: front
       container_registry: 'ecr'
       container_repository_uri: '988760979462.dkr.ecr.eu-west-3.amazonaws.com/hello-cicd-api'
