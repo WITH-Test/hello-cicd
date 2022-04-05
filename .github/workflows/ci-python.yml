@@ -17,6 +17,8 @@ jobs:
     needs: lint
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
+    secrets:
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
     with:
       project-folder: api
       container_registry: 'ecr'
