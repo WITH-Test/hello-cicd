@@ -21,5 +21,5 @@ jobs:
       AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
     with:
       project-folder: api
-      container_registry: 'ecr'
-      container_repository_uri: '988760979462.dkr.ecr.eu-west-3.amazonaws.com/hello-cicd'  # will be suffixed
+      container_registry: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
+      container_repository: 'hello-cicd-api'
