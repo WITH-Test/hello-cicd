@@ -5,7 +5,9 @@ on: [workflow_dispatch]
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      ORG_SECRET: ${{ secrets.GHA_ORG_SECRET }}
     steps:
     - name: Check ORG secret
       run: |
-        echo ${{ secrets.GHA_ORG_SECRET }}
+        echo ${{ env.ORG_SECRET }}
