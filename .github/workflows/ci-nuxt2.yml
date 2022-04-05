@@ -52,8 +52,9 @@ jobs:
     needs: nuxt
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
-    with:
+    env:
       AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+    with:
       project-folder: front
       container_registry: 'ecr'
       container_repository_uri: '988760979462.dkr.ecr.eu-west-3.amazonaws.com/hello-cicd-api'
