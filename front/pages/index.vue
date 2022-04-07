@@ -6,7 +6,7 @@
       </card>
 
       <card title="Responsive" icon="cellphone-link">
-        <b class="has-text-grey"> Every </b> component is responsive
+        <b class="has-text-grey"> GitHub Actions </b> will deploy this.
       </card>
 
       <card title="Modern" icon="alert-decagram">
