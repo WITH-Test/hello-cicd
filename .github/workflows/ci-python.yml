@@ -6,11 +6,15 @@ on:
       - "api/**"
   workflow_dispatch:
 
+env:
+  WORKDIR: api
+
+
 jobs:
   lint:
     uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
-      project-folder: api
+      project-folder: ${{ env.WORKDIR }}
       DEPENDENCY_MANAGER: 'poetry'
 
   build-image:
