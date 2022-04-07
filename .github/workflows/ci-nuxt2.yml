@@ -52,3 +52,8 @@ jobs:
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
     with:
       project-folder: front
+
+  deploy:
+    needs: build-image
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/deploy-aws-ecs.yml@main
