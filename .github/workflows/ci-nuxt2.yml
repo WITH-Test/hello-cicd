@@ -53,7 +53,15 @@ jobs:
     with:
       project-folder: front
 
-  deploy:
+  select-environment:
     needs: build-image
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/select-deploy-environment.yml@main
+
+
+  deploy:
+    needs: select-environment
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/deploy-aws-ecs.yml@main
+    with:
+      ENVIRONMENT: ${{needs.select-environment.outputs.env}}
