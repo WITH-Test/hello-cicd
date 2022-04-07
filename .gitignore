@@ -3,3 +3,6 @@
 **/.env.*.local
 
 **/*.sqlite3
+
+.nvmrc
+.python-version
