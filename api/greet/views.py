@@ -19,3 +19,9 @@ def hello_view(request):
 def yell_view(request):
     greeted = random.choice(GREETED)
     return JsonResponse({"message": f"Hello, {greeted}!".upper()})
+
+
+@require_http_methods(["GET"])
+def whisper_view(request):
+    greeted = random.choice(GREETED)
+    return JsonResponse({"message": f"Hello, {greeted}".lower()})
