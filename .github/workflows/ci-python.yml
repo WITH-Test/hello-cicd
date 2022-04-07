@@ -17,8 +17,12 @@ jobs:
     needs: lint
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
+    secrets:
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
     with:
       project-folder: api
+      container_registry: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
+      container_repository: 'hello-cicd-api'
 
   select-environment:
     needs: build-image
@@ -29,6 +33,8 @@ jobs:
     needs: select-environment
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/deploy-aws-ecs.yml@main
+    secrets:
+      AWS_REPOSITORY: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
     with:
       ENVIRONMENT: ${{needs.select-environment.outputs.env}}
 
