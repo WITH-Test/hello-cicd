@@ -6,3 +6,6 @@
 
 .nvmrc
 .python-version
+
+# local act configs
+act/

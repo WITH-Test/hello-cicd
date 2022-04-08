@@ -10,6 +10,7 @@ jobs:
   lint:
     uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
+      runs-on: ubuntu-latest
       project-folder: api
       DEPENDENCY_MANAGER: 'poetry'
 
