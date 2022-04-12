@@ -1,12 +1,12 @@
 <template>
   <section class="section">
     <div class="columns is-mobile">
-      <card title="Free" icon="github">
-        Open source on <a href="https://github.com/buefy/buefy"> GitHub </a>
+      <card title="CICD" icon="github">
+        Source code on <a href="https://github.com/WITH-Test/hello-cicd"> GitHub </a>
       </card>
 
       <card title="Responsive" icon="cellphone-link">
-        <b class="has-text-grey"> Every </b> component is responsive
+        <b class="has-text-grey"> GitHub Actions </b> will deploy this.
       </card>
 
       <card title="Modern" icon="alert-decagram">

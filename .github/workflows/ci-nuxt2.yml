@@ -1,20 +1,16 @@
 name: Nuxt 2
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    paths:
+      - "front/**"
+  workflow_dispatch:
 
 jobs:
-#  project-changed:
-#    uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
-#    with:
-#      project-folder: front
-
   nuxt:
-#    needs: project-changed
-#    if: needs.project-changed.outputs.changed == 'true'
-    id: nuxt
     defaults:
       run:
-        working-directory: ./front
+        working-directory: front
 
     runs-on: ${{ matrix.os }}
 
@@ -25,18 +21,21 @@ jobs:
 
     steps:
       - name: Checkout 🛎
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
 
       - name: Setup node env 🏗
-        uses: actions/setup-node@v2.1.5
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
           check-latest: true
 
       - name: Cache node_modules 📦
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v3
+        id: cache
         with:
-          path: ~/.npm
+          path: |
+            ~/.npm
+            node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
@@ -49,10 +48,28 @@ jobs:
 
       - name: Run tests 🧪
         run: npm run test
-#
-#  build-image:
-#    needs: nuxt
-#    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-#    uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
-#    with:
-#      container_repository: ${{github.event.inputs.}}
+
+  build-image:
+    needs: nuxt
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
+    secrets:
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+    with:
+      project-folder: front
+      container_registry: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
+      container_repository: 'hello-cicd-front'
+
+  select-environment:
+    needs: build-image
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/select-deploy-environment.yml@main
+
+  deploy:
+    needs: select-environment
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/deploy-aws-ecs.yml@main
+    secrets:
+      AWS_REPOSITORY: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
+    with:
+      ENVIRONMENT: ${{needs.select-environment.outputs.env}}

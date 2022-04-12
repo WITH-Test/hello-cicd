@@ -3,3 +3,9 @@
 **/.env.*.local
 
 **/*.sqlite3
+
+.nvmrc
+.python-version
+
+# local act configs
+act/

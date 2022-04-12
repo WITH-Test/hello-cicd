@@ -1,24 +1,41 @@
 name: Python
 
-on: [push, workflow_dispatch]
+on:
+  push:
+    paths:
+      - "api/**"
+  workflow_dispatch:
 
 jobs:
-
-#  project-changed:
-#    uses: WITH-Test/workflows/.github/workflows/project-changed.yml@main
-#    with:
-#      project-folder: api
-
   lint:
-#    needs: project-changed
-#    if: needs.project-changed.outputs.changed == 'true'
     uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
+      runs-on: ubuntu-latest
       project-folder: api
-      PYTHON_VERSION: '3.9'
       DEPENDENCY_MANAGER: 'poetry'
-      ENFORCE_ISORT: ${{ true }}
-      ENFORCE_BLACK: ${{ true }}
-      ENFORCE_FLAKE8: ${{ false }}
-      ENFORCE_PYLINT: ${{ false }}
-      ENFORCE_BANDIT: ${{ false }}
+
+  build-image:
+    needs: lint
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
+    secrets:
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+    with:
+      project-folder: api
+      container_registry: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
+      container_repository: 'hello-cicd-api'
+
+  select-environment:
+    needs: build-image
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/select-deploy-environment.yml@main
+
+  deploy:
+    needs: select-environment
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/deploy-aws-ecs.yml@main
+    secrets:
+      AWS_REPOSITORY: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
+    with:
+      ENVIRONMENT: ${{needs.select-environment.outputs.env}}
+
