@@ -13,7 +13,7 @@ jobs:
 
       - name: DogeOps enabled
         id: enabled
-        uses: WITH-Test/prepare-infra
+        uses: WITH-Test/prepare-infra@main
 
       - name: No DogeOps = such disapointment
         if: steps.enabled.outputs.enabled == 'false'
