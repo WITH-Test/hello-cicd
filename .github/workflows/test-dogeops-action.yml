@@ -18,5 +18,4 @@ jobs:
       - name: No DogeOps = such disapointment
         if: steps.enabled.outputs.dogeops == 'false'
         run:
-          echo
           exit 1
