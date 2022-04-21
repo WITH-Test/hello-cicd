@@ -1,0 +1,22 @@
+name: Prepare DogeOps
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v3
+
+      - name: DogeOps enabled
+        id: enabled
+        uses: WITH-Test/prepare-infra
+
+      - name: No DogeOps = such disapointment
+        if: steps.enabled.outputs.enabled == 'false'
+        run:
+          echo
+          exit 1

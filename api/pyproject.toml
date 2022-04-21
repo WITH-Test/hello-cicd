@@ -7,7 +7,7 @@ authors = ["Carlos Gonzalez <carlos.gonzalez@with-madrid.com>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 Django = "^4.0.4"
-gunicorn = "^20.1.0"
+gunicorn = {extras = ["gevent"], version = "^20.1.0"}
 
 [tool.poetry.dev-dependencies]
 isort = "^5.10.1"
