@@ -16,7 +16,7 @@ jobs:
         uses: WITH-Test/prepare-infra@main
 
       - name: No DogeOps = such disapointment
-        if: steps.enabled.outputs.enabled == 'false'
+        if: steps.enabled.outputs.dogeops == 'false'
         run:
           echo
           exit 1
