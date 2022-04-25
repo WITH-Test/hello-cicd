@@ -4,8 +4,8 @@ on:
   push:
     paths:
     - .dogeops.yml
-    - api/terraform
-    - front/terraform
+    - api/terraform/**
+    - front/terraform/**
   workflow_dispatch:
 
 jobs:
