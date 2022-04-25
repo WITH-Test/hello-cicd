@@ -1,4 +1,2 @@
-{
-    "client": "hello",
-    "project": "cicd"
-}
+Client: hello
+Project: cicd

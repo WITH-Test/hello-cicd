@@ -1,6 +1,10 @@
 name: Prepare DogeOps
 
 on:
+  push:
+    paths:
+    - api/terraform
+    - front/terraform
   workflow_dispatch:
 
 jobs:
@@ -12,10 +16,21 @@ jobs:
         uses: actions/checkout@v3
 
       - name: DogeOps enabled
-        id: enabled
+        id: dogeops
         uses: WITH-Test/prepare-infra@main
 
       - name: No DogeOps = such disapointment
-        if: steps.enabled.outputs.dogeops == 'false'
+        if: steps.dogeops.outputs.enabled == 'false'
         run:
           exit 1
+
+      - name: Setup Terraform
+        id: init
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.9
+
+      - name: Check TF backend
+        run:
+          echo GitHub Context "${{ github }}"
+          echo TF Backend "${{ steps.dogeops.outputs.tf_backend }}"
