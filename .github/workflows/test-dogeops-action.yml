@@ -3,6 +3,7 @@ name: Prepare DogeOps
 on:
   push:
     paths:
+    - .dogeops.yml
     - api/terraform
     - front/terraform
   workflow_dispatch:
