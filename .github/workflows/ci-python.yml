@@ -25,17 +25,9 @@ jobs:
       container_registry: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
       container_repository: 'hello-cicd-api'
 
-  select-environment:
+  deploy:
     needs: build-image
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    uses: WITH-Test/workflows/.github/workflows/select-deploy-environment.yml@main
-
-  deploy:
-    needs: select-environment
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    uses: WITH-Test/workflows/.github/workflows/deploy-aws-ecs.yml@main
-    secrets:
-      AWS_REPOSITORY: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
+    uses: WITH-Test/workflows/.github/workflows/dogeops-deploy.yml@main
     with:
-      ENVIRONMENT: ${{needs.select-environment.outputs.env}}
-
+      deploy_unit: api
