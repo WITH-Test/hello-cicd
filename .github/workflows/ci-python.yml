@@ -6,15 +6,20 @@ on:
       - "api/**"
   workflow_dispatch:
 
+env:
+  runs-on: 'ubuntu-latest'
+
 jobs:
   lint:
+    runs-on: ${{ env.runs-on }}
     uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
-      runs-on: ubuntu-latest
+      runs-on: ${{ env.runs-on }}
       project-folder: api
       DEPENDENCY_MANAGER: 'poetry'
 
   build-image:
+    runs-on: ${{ env.runs-on }}
     needs: lint
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
@@ -26,6 +31,7 @@ jobs:
       container_repository: 'hello-cicd-api'
 
   deploy:
+    runs-on: ${{ env.runs-on }}
     needs: build-image
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/dogeops-deploy.yml@main
