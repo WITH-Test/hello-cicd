@@ -44,6 +44,6 @@ jobs:
     needs: select-env
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/dogeops-deploy.yml@main
-    environment: ${{ needs.select-env.outputs.environment }}
     with:
+      environment: ${{ needs.select-env.outputs.environment }}
       deploy_unit: api
