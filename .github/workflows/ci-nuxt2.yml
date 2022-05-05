@@ -11,6 +11,7 @@ jobs:
     defaults:
       run:
         working-directory: front
+        shell: bash
 
     runs-on: ${{ matrix.os }}
 

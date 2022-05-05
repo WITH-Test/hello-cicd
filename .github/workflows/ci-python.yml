@@ -8,7 +8,6 @@ on:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
     uses: WITH-Test/workflows/.github/workflows/lint-python.yml@main
     with:
       project-folder: api
@@ -28,7 +27,6 @@ jobs:
           deploy_unit: api
 
   build-image:
-    runs-on: ubuntu-latest
     needs: select-env
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
@@ -40,7 +38,6 @@ jobs:
       container_repository: 'hello-cicd-api'
 
   deploy:
-    runs-on: ubuntu-latest
     needs: [select-env, build-image]
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/dogeops-deploy.yml@main
