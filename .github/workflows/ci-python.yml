@@ -14,21 +14,9 @@ jobs:
       project-folder: api
       DEPENDENCY_MANAGER: 'poetry'
 
-  build-image:
-    runs-on: ubuntu-latest
-    needs: lint
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
-    secrets:
-      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
-    with:
-      project-folder: api
-      container_registry: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
-      container_repository: 'hello-cicd-api'
-
   select-env:
     runs-on: ubuntu-latest
-    needs: build-image
+    needs: lint
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     outputs:
       environment: ${{ steps.doge-env.outputs.environment }}
@@ -39,9 +27,21 @@ jobs:
         with:
           deploy_unit: api
 
-  deploy:
+  build-image:
     runs-on: ubuntu-latest
     needs: select-env
+    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+    uses: WITH-Test/workflows/.github/workflows/docker-build-push.yml@main
+    secrets:
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+    with:
+      project-folder: api
+      container_registry: '988760979462.dkr.ecr.eu-west-3.amazonaws.com'
+      container_repository: 'hello-cicd-api'
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [select-env, build-image]
     if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
     uses: WITH-Test/workflows/.github/workflows/dogeops-deploy.yml@main
     with:
