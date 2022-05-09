@@ -1,0 +1,11 @@
+name: Terraform
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    uses: WITH-Test/workflows/.github/workflows/dogeops-deploy.yml@main
+    with:
+      environment: develop
+      deploy_unit: api
