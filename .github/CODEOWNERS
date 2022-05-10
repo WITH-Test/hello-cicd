@@ -5,5 +5,5 @@
 *                   @carlos-with
 
 .github/            @WITH-Test/wow
-terraform/          @WITH-Test/wow
+**/terraform/       @WITH-Test/wow
 **/Dockerfile       @WITH-Test/wow

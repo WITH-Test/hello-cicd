@@ -1,11 +1,22 @@
-.idea/
+# local dev secrets
+.in
+.out
+
+# local env files
 **/.env
+**/.env.local
 **/.env.*.local
+
+.idea/
 
 **/*.sqlite3
 
+# dev utils
 .nvmrc
 .python-version
 
 # local act configs
 act/
+
+# terraform configs
+**/*.tfbackend

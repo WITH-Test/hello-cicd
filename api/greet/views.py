@@ -18,4 +18,4 @@ def hello_view(request):
 @require_http_methods(["GET"])
 def yell_view(request):
     greeted = random.choice(GREETED)
-    return JsonResponse({"message": f"Hello, {greeted}!".upper()})
+    return JsonResponse({"message": f"Hello, {greeted}!!!!".upper()})
