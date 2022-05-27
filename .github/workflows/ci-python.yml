@@ -13,18 +13,18 @@ jobs:
       project-folder: api
       DEPENDENCY_MANAGER: 'poetry'
 
-  select-env:
-    runs-on: ubuntu-latest
-    needs: lint
-    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
-    outputs:
-      environment: ${{ steps.doge-env.outputs.environment }}
-    steps:
-      - name: DogeOps Environment
-        id: doge-env
-        uses: WITH-Test/action-select-deploy-env@main
-        with:
-          deploy_unit: api
+#  select-env:
+#    runs-on: ubuntu-latest
+#    needs: lint
+#    if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+#    outputs:
+#      environment: ${{ steps.doge-env.outputs.environment }}
+#    steps:
+#      - name: DogeOps Environment
+#        id: doge-env
+#        uses: WITH-Test/action-select-deploy-env@main
+#        with:
+#          deploy_unit: api
 
 #  build-image:
 #    needs: select-env
