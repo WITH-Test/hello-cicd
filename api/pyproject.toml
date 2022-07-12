@@ -8,7 +8,7 @@ authors = ["Carlos Gonzalez <carlos.gonzalez@with-madrid.com>"]
 python = "^3.9"
 Django = "^4.0.4"
 gunicorn = {extras = ["gevent"], version = "^20.1.0"}
-memray = "^1.0.3"
+memray = "^1.2.0"
 
 [tool.poetry.dev-dependencies]
 isort = "^5.10.1"
