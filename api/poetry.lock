@@ -176,7 +176,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "memray"
-version = "1.0.3"
+version = "1.2.0"
 description = "A memory profiler for Python applications"
 category = "main"
 optional = false
@@ -184,7 +184,7 @@ python-versions = ">=3.7.0"
 
 [package.dependencies]
 jinja2 = "*"
-rich = "<11.0.0"
+rich = "*"
 
 [package.extras]
 benchmark = ["asv"]
@@ -313,7 +313,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f301867fb164ecccff4df12ce5933c4afb6069b6c9447d619ae5bb8506a745ec"
+content-hash = "897e04b53944b8299a1c735cc5c46df094941d72465f0cc3f01c1bbc599d1f6b"
 
 [metadata.files]
 asgiref = [
@@ -560,15 +560,15 @@ markupsafe = [
     {file = "MarkupSafe-2.1.1.tar.gz", hash = "sha256:7f91197cc9e48f989d12e4e6fbc46495c446636dfc81b9ccf50bb0ec74b91d4b"},
 ]
 memray = [
-    {file = "memray-1.0.3-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:aea82810789e8c08af6f1a6bb463f5d875f8b6043083f0281c359a6cb90d4c84"},
-    {file = "memray-1.0.3-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:bedc9375b7ec851986c35c2f6c5e4465835bfa8fd4fef059c3057e1884ed0975"},
-    {file = "memray-1.0.3-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:72da89ea6e34837086972a65780b6329cb43372e68c5197eb54ef37caedef518"},
-    {file = "memray-1.0.3-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:00747f6ea904524974038758d8d163c32c42f0ecc227439281a88757229f1525"},
-    {file = "memray-1.0.3-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:c382a9dbdd160a7f2d18ad86fb3595089895057a546aba03edbbc99d5625834f"},
-    {file = "memray-1.0.3-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:e5ac539d1027fde1994aa1a44a6471bdd106793481328f9be35db7fa635b98e4"},
-    {file = "memray-1.0.3-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:707f40223554847c2e9c58eb2a711c5ada45a1a4309a2e11d673aa567225a583"},
-    {file = "memray-1.0.3-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d31c432c0a6697e062135e620d19f25567436375f7e5ed77698d07fced33d0b7"},
-    {file = "memray-1.0.3.tar.gz", hash = "sha256:cfff403e1a25a61265547fe7ba696bd08bbbce93400444d66b4025cb4adc6e88"},
+    {file = "memray-1.2.0-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:f5ddc70070ba0869c2ace410cade4118d31dee478d2e0b45501bf8e7c721ede4"},
+    {file = "memray-1.2.0-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:30e524c215c77f9f8bb4157cff4b913c56713d16632e4bbb9c1237d8220b44f6"},
+    {file = "memray-1.2.0-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:55a69c25a0fa32836527efa6ede5ce836d176e5b3e8f341f3e28f7c3390bcdc8"},
+    {file = "memray-1.2.0-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:c880d71b930531dbf992940fda6103f3b9e4d4ee68e79d757be3d089420624e6"},
+    {file = "memray-1.2.0-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:5b05c5cfe617e39aefbbeddc7908af387da693c7fc3e3a218ce4f8ca5c72f784"},
+    {file = "memray-1.2.0-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:fced437907c77f315267598ed4d6ac2fe40e99ea550bbd9d692a07c3defdb966"},
+    {file = "memray-1.2.0-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:6ad2f5858e4edde201ac4ba9e57bebb83c7dfcac4b21894dc3459f1506359a16"},
+    {file = "memray-1.2.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:3ba04ae9a3d41d1ef68c71d13a63c5b5dbdfb231d189b6b7f7e3ff281853da6e"},
+    {file = "memray-1.2.0.tar.gz", hash = "sha256:0afdb04133d8a453fa5ebf56b220881b416ee9e4f48f594a77fe467be29f58cb"},
 ]
 mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
