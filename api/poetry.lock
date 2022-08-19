@@ -7,7 +7,7 @@ optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-tests = ["pytest", "pytest-asyncio", "mypy (>=0.800)"]
+tests = ["mypy (>=0.800)", "pytest-asyncio", "pytest"]
 
 [[package]]
 name = "black"
@@ -57,7 +57,7 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 name = "colorama"
 version = "0.4.4"
 description = "Cross-platform colored terminal text."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -70,7 +70,7 @@ optional = false
 python-versions = "*"
 
 [package.extras]
-test = ["flake8 (==3.7.8)", "hypothesis (==3.55.3)"]
+test = ["hypothesis (==3.55.3)", "flake8 (==3.7.8)"]
 
 [[package]]
 name = "django"
@@ -86,8 +86,8 @@ sqlparse = ">=0.2.2"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
 [package.extras]
-argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
+argon2 = ["argon2-cffi (>=19.1.0)"]
 
 [[package]]
 name = "gevent"
@@ -176,7 +176,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "memray"
-version = "1.0.3"
+version = "1.3.0"
 description = "A memory profiler for Python applications"
 category = "main"
 optional = false
@@ -184,14 +184,14 @@ python-versions = ">=3.7.0"
 
 [package.dependencies]
 jinja2 = "*"
-rich = "<11.0.0"
+rich = ">=11.2.0"
 
 [package.extras]
+test = ["greenlet", "pytest-cov", "pytest", "cython"]
+lint = ["check-manifest", "mypy", "isort", "flake8", "black"]
+docs = ["towncrier", "sphinx-argparse", "furo", "sphinx", "bump2version"]
+dev = ["greenlet", "asv", "towncrier", "sphinx-argparse", "furo", "sphinx", "bump2version", "check-manifest", "mypy", "isort", "flake8", "black", "pytest-cov", "pytest", "cython"]
 benchmark = ["asv"]
-dev = ["cython", "pytest", "pytest-cov", "black", "flake8", "isort", "mypy", "check-manifest", "bump2version", "sphinx", "furo", "sphinx-argparse", "towncrier", "asv"]
-docs = ["bump2version", "sphinx", "furo", "sphinx-argparse", "towncrier"]
-lint = ["black", "flake8", "isort", "mypy", "check-manifest"]
-test = ["cython", "pytest", "pytest-cov"]
 
 [[package]]
 name = "mypy-extensions"
@@ -239,14 +239,13 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "rich"
-version = "10.16.2"
+version = "12.5.1"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 category = "main"
 optional = false
-python-versions = ">=3.6.2,<4.0.0"
+python-versions = ">=3.6.3,<4.0.0"
 
 [package.dependencies]
-colorama = ">=0.4.0,<0.5.0"
 commonmark = ">=0.9.0,<0.10.0"
 pygments = ">=2.6.0,<3.0.0"
 
@@ -313,7 +312,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f301867fb164ecccff4df12ce5933c4afb6069b6c9447d619ae5bb8506a745ec"
+content-hash = "153c9dbbff32bc46c1006f52a8ce649bc95ec2a078d623b6f536fe5bc9893d9d"
 
 [metadata.files]
 asgiref = [
@@ -560,15 +559,25 @@ markupsafe = [
     {file = "MarkupSafe-2.1.1.tar.gz", hash = "sha256:7f91197cc9e48f989d12e4e6fbc46495c446636dfc81b9ccf50bb0ec74b91d4b"},
 ]
 memray = [
-    {file = "memray-1.0.3-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:aea82810789e8c08af6f1a6bb463f5d875f8b6043083f0281c359a6cb90d4c84"},
-    {file = "memray-1.0.3-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:bedc9375b7ec851986c35c2f6c5e4465835bfa8fd4fef059c3057e1884ed0975"},
-    {file = "memray-1.0.3-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:72da89ea6e34837086972a65780b6329cb43372e68c5197eb54ef37caedef518"},
-    {file = "memray-1.0.3-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:00747f6ea904524974038758d8d163c32c42f0ecc227439281a88757229f1525"},
-    {file = "memray-1.0.3-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:c382a9dbdd160a7f2d18ad86fb3595089895057a546aba03edbbc99d5625834f"},
-    {file = "memray-1.0.3-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:e5ac539d1027fde1994aa1a44a6471bdd106793481328f9be35db7fa635b98e4"},
-    {file = "memray-1.0.3-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:707f40223554847c2e9c58eb2a711c5ada45a1a4309a2e11d673aa567225a583"},
-    {file = "memray-1.0.3-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d31c432c0a6697e062135e620d19f25567436375f7e5ed77698d07fced33d0b7"},
-    {file = "memray-1.0.3.tar.gz", hash = "sha256:cfff403e1a25a61265547fe7ba696bd08bbbce93400444d66b4025cb4adc6e88"},
+    {file = "memray-1.3.0-2-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:7f4dd8a58a6b1eeb5fcfa54d728a75f58a189ad9c3d8412cfcbd694fadfe5f0e"},
+    {file = "memray-1.3.0-2-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:488a90cec2f2f6c9cb0e0fcce4c2eb11ebaf1517a77c5cf1ba4e8302126f94dc"},
+    {file = "memray-1.3.0-2-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:1c3b81f2b047abce5aedea3e1b1fbbe1b6eb76bf5af58ce74b497cf71f9cff14"},
+    {file = "memray-1.3.0-2-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:d5c81fa76c8e79e407df0abccdce8ad6c30a996cdebf1e0935144b7fd4b1e039"},
+    {file = "memray-1.3.0-cp310-cp310-macosx_10_14_x86_64.whl", hash = "sha256:0708afa133a790a845a79bbffe30b78b159af177cc6f177a680ace9646501f21"},
+    {file = "memray-1.3.0-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:f756d2ed0cf4597cef4685f36af9e7efb843b453c3bd9adc53c8801664cbb0a6"},
+    {file = "memray-1.3.0-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d980985a3e499df67e0b5a6ad2bb282f6999e767710dab5cd6b786e184e347cf"},
+    {file = "memray-1.3.0-cp311-cp311-macosx_10_14_x86_64.whl", hash = "sha256:1495e79aba18efacf225763dd7e12a4a07ca470e4145543f0eb1cf8c8889a3ee"},
+    {file = "memray-1.3.0-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:cc91095150021be3c6e251ed9ff558fab6540693838282e7ee4581ee66888099"},
+    {file = "memray-1.3.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ef3095f468afc22df74e8df7f942839267d5ed428ab0268abfac3f4d599126b1"},
+    {file = "memray-1.3.0-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:aea8c024d8aa1b06f7b3749c93eb8c106d23330ac7f96f0e06737d4c729305d8"},
+    {file = "memray-1.3.0-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:5ae940a47dab8ed85a80bac7d7d5ff038178c26274472411f814f810f9c39b09"},
+    {file = "memray-1.3.0-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:5468a68c8ac1cfabeacd7d278e4cc3fb522f4643ecf0f693024993105f88e4eb"},
+    {file = "memray-1.3.0-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:d637e14ea1ed3c9c5f18028cb9594d1f4c4e4c2054d125ec9ada3fcbd6379e15"},
+    {file = "memray-1.3.0-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:21e90f7412d00490175a02636c67c60b91e3c3f34a019b52cb2e1efe0c3caf3d"},
+    {file = "memray-1.3.0-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:b73fffbf17a1dac87b9fc79fe0da89d910fb94aa8a8e0ef0b3aa5ce3efd9b08e"},
+    {file = "memray-1.3.0-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:610ecff6b83e6193bb58e798bd8673e14e2288f44b2d3d3e4f0d094dac1a4d38"},
+    {file = "memray-1.3.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:b973035993197d1553420374724c2edc1dc78f1aaacef394b18ab5f29a176503"},
+    {file = "memray-1.3.0.tar.gz", hash = "sha256:92a94234c3bde9cefe89766b31c3e5df3331bd3cf781de6957caf7de62e7e200"},
 ]
 mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
@@ -591,8 +600,8 @@ pygments = [
     {file = "Pygments-2.11.2.tar.gz", hash = "sha256:4e426f72023d88d03b2fa258de560726ce890ff3b630f88c21cbb8b2503b8c6a"},
 ]
 rich = [
-    {file = "rich-10.16.2-py3-none-any.whl", hash = "sha256:c59d73bd804c90f747c8d7b1d023b88f2a9ac2454224a4aeaf959b21eeb42d03"},
-    {file = "rich-10.16.2.tar.gz", hash = "sha256:720974689960e06c2efdb54327f8bf0cdbdf4eae4ad73b6c94213cad405c371b"},
+    {file = "rich-12.5.1-py3-none-any.whl", hash = "sha256:2eb4e6894cde1e017976d2975ac210ef515d7548bc595ba20e195fb9628acdeb"},
+    {file = "rich-12.5.1.tar.gz", hash = "sha256:63a5c5ce3673d3d5fbbf23cd87e11ab84b6b451436f1b7f19ec54b6bc36ed7ca"},
 ]
 sqlparse = [
     {file = "sqlparse-0.4.2-py3-none-any.whl", hash = "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"},
