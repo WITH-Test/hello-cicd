@@ -7,7 +7,7 @@ optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-tests = ["pytest", "pytest-asyncio", "mypy (>=0.800)"]
+tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 
 [[package]]
 name = "black"
@@ -57,7 +57,7 @@ colorama = {version = "*", markers = "platform_system == \"Windows\""}
 name = "colorama"
 version = "0.4.4"
 description = "Cross-platform colored terminal text."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
@@ -107,8 +107,8 @@ greenlet = {version = ">=1.1.0,<2.0", markers = "platform_python_implementation 
 dnspython = ["dnspython (>=1.16.0,<2.0)", "idna"]
 docs = ["repoze.sphinx.autointerface", "sphinxcontrib-programoutput", "zope.schema"]
 monitor = ["psutil (>=5.7.0)"]
-recommended = ["cffi (>=1.12.2)", "dnspython (>=1.16.0,<2.0)", "idna", "selectors2", "backports.socketpair", "psutil (>=5.7.0)"]
-test = ["requests", "objgraph", "cffi (>=1.12.2)", "dnspython (>=1.16.0,<2.0)", "idna", "selectors2", "futures", "mock", "backports.socketpair", "contextvars (==2.4)", "coverage (>=5.0)", "coveralls (>=1.7.0)", "psutil (>=5.7.0)"]
+recommended = ["backports.socketpair", "cffi (>=1.12.2)", "dnspython (>=1.16.0,<2.0)", "idna", "psutil (>=5.7.0)", "selectors2"]
+test = ["backports.socketpair", "cffi (>=1.12.2)", "contextvars (==2.4)", "coverage (>=5.0)", "coveralls (>=1.7.0)", "dnspython (>=1.16.0,<2.0)", "futures", "idna", "mock", "objgraph", "psutil (>=5.7.0)", "requests", "selectors2"]
 
 [[package]]
 name = "greenlet"
@@ -147,10 +147,10 @@ optional = false
 python-versions = ">=3.6.1,<4.0"
 
 [package.extras]
-pipfile_deprecated_finder = ["pipreqs", "requirementslib"]
-requirements_deprecated_finder = ["pipreqs", "pip-api"]
 colors = ["colorama (>=0.4.3,<0.5.0)"]
+pipfile_deprecated_finder = ["pipreqs", "requirementslib"]
 plugins = ["setuptools"]
+requirements_deprecated_finder = ["pip-api", "pipreqs"]
 
 [[package]]
 name = "jinja2"
@@ -176,7 +176,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "memray"
-version = "1.0.3"
+version = "1.3.1"
 description = "A memory profiler for Python applications"
 category = "main"
 optional = false
@@ -184,14 +184,14 @@ python-versions = ">=3.7.0"
 
 [package.dependencies]
 jinja2 = "*"
-rich = "<11.0.0"
+rich = ">=11.2.0"
 
 [package.extras]
 benchmark = ["asv"]
-dev = ["cython", "pytest", "pytest-cov", "black", "flake8", "isort", "mypy", "check-manifest", "bump2version", "sphinx", "furo", "sphinx-argparse", "towncrier", "asv"]
-docs = ["bump2version", "sphinx", "furo", "sphinx-argparse", "towncrier"]
-lint = ["black", "flake8", "isort", "mypy", "check-manifest"]
-test = ["cython", "pytest", "pytest-cov"]
+dev = ["asv", "black", "bump2version", "check-manifest", "cython", "flake8", "furo", "greenlet", "isort", "mypy", "pytest", "pytest-cov", "sphinx", "sphinx-argparse", "towncrier"]
+docs = ["bump2version", "furo", "sphinx", "sphinx-argparse", "towncrier"]
+lint = ["black", "check-manifest", "flake8", "isort", "mypy"]
+test = ["cython", "greenlet", "pytest", "pytest-cov"]
 
 [[package]]
 name = "mypy-extensions"
@@ -218,8 +218,8 @@ optional = false
 python-versions = ">=3.7"
 
 [package.extras]
-docs = ["furo (>=2021.7.5b38)", "proselint (>=0.10.2)", "sphinx-autodoc-typehints (>=1.12)", "sphinx (>=4)"]
-test = ["appdirs (==1.4.4)", "pytest-cov (>=2.7)", "pytest-mock (>=3.6)", "pytest (>=6)"]
+docs = ["furo (>=2021.7.5b38)", "proselint (>=0.10.2)", "sphinx (>=4)", "sphinx-autodoc-typehints (>=1.12)"]
+test = ["appdirs (==1.4.4)", "pytest (>=6)", "pytest-cov (>=2.7)", "pytest-mock (>=3.6)"]
 
 [[package]]
 name = "pycparser"
@@ -239,14 +239,13 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "rich"
-version = "10.16.2"
+version = "12.5.1"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 category = "main"
 optional = false
-python-versions = ">=3.6.2,<4.0.0"
+python-versions = ">=3.6.3,<4.0.0"
 
 [package.dependencies]
-colorama = ">=0.4.0,<0.5.0"
 commonmark = ">=0.9.0,<0.10.0"
 pygments = ">=2.6.0,<3.0.0"
 
@@ -306,14 +305,14 @@ optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 
 [package.extras]
-docs = ["sphinx", "repoze.sphinx.autointerface"]
+docs = ["repoze.sphinx.autointerface", "sphinx"]
 test = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f301867fb164ecccff4df12ce5933c4afb6069b6c9447d619ae5bb8506a745ec"
+content-hash = "b31495443ed54608af4e7c217f7786d99ccab07e33d2902e311db005172c151b"
 
 [metadata.files]
 asgiref = [
@@ -560,15 +559,25 @@ markupsafe = [
     {file = "MarkupSafe-2.1.1.tar.gz", hash = "sha256:7f91197cc9e48f989d12e4e6fbc46495c446636dfc81b9ccf50bb0ec74b91d4b"},
 ]
 memray = [
-    {file = "memray-1.0.3-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:aea82810789e8c08af6f1a6bb463f5d875f8b6043083f0281c359a6cb90d4c84"},
-    {file = "memray-1.0.3-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:bedc9375b7ec851986c35c2f6c5e4465835bfa8fd4fef059c3057e1884ed0975"},
-    {file = "memray-1.0.3-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:72da89ea6e34837086972a65780b6329cb43372e68c5197eb54ef37caedef518"},
-    {file = "memray-1.0.3-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:00747f6ea904524974038758d8d163c32c42f0ecc227439281a88757229f1525"},
-    {file = "memray-1.0.3-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:c382a9dbdd160a7f2d18ad86fb3595089895057a546aba03edbbc99d5625834f"},
-    {file = "memray-1.0.3-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:e5ac539d1027fde1994aa1a44a6471bdd106793481328f9be35db7fa635b98e4"},
-    {file = "memray-1.0.3-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:707f40223554847c2e9c58eb2a711c5ada45a1a4309a2e11d673aa567225a583"},
-    {file = "memray-1.0.3-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d31c432c0a6697e062135e620d19f25567436375f7e5ed77698d07fced33d0b7"},
-    {file = "memray-1.0.3.tar.gz", hash = "sha256:cfff403e1a25a61265547fe7ba696bd08bbbce93400444d66b4025cb4adc6e88"},
+    {file = "memray-1.3.1-cp310-cp310-macosx_10_14_x86_64.whl", hash = "sha256:26344fc9244bf45a0f55e93cc0662ef243b3aec00d8fb0059e11dbe43c4c314d"},
+    {file = "memray-1.3.1-cp310-cp310-macosx_12_0_arm64.whl", hash = "sha256:03444ba1a0b774e02f2aa875e3534e04e347a7ce9be0d33cc19ca743930f5d65"},
+    {file = "memray-1.3.1-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:03618e5ec9cd0310a755b3f31c353eb9444df0cc8c9ab480c0358c46888836fe"},
+    {file = "memray-1.3.1-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:041a5639e9e87fad3b62abd1c623b281f3ebbf3ee860eb9099c5f5da84410fd0"},
+    {file = "memray-1.3.1-cp311-cp311-macosx_10_14_x86_64.whl", hash = "sha256:f9a524a6259a7047ad463d6b132d679ac504d98b32cb98cc09563479c0e89329"},
+    {file = "memray-1.3.1-cp311-cp311-macosx_12_0_arm64.whl", hash = "sha256:20b6c919aaba9b37861727b55d210f4a4ea61962193851e7ab7cd77c74cf76dc"},
+    {file = "memray-1.3.1-cp311-cp311-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:37ceb32d836863e373477484cdc99e2be2fa2333e43a9905786c49e8f44ead4a"},
+    {file = "memray-1.3.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:4edf9bb01e7f9eb60f3e5fa5f96fc53d4e4c3d98e221795de2cc08264543d898"},
+    {file = "memray-1.3.1-cp37-cp37m-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:d500f47391b873d759fe34eaccb3715b3acdcb45398b9cab3fa775be3e4c2206"},
+    {file = "memray-1.3.1-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d837b9ddd2480d7095dac7f1f377b947f27ad312160240d866b005d944b79197"},
+    {file = "memray-1.3.1-cp38-cp38-macosx_10_14_x86_64.whl", hash = "sha256:bff74e1012d07e55b67fa3471cd37fca3e03e39c220255d464f477b1ab5f8d9c"},
+    {file = "memray-1.3.1-cp38-cp38-macosx_12_0_arm64.whl", hash = "sha256:4568f063e4c8dc25bacd2f4c1e3057ee7f4b7d767367b776ed607a837450f502"},
+    {file = "memray-1.3.1-cp38-cp38-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:e9db5cfa22563852b935902478779ad89d12f94f53753e97422df37470db167e"},
+    {file = "memray-1.3.1-cp38-cp38-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:d2b8b3fad48de8a818a8e34f046a412a213fce94728fe6b7a1415fafcb9e1358"},
+    {file = "memray-1.3.1-cp39-cp39-macosx_10_14_x86_64.whl", hash = "sha256:e55e5f4560690411467154f7b11125903f230c04b9bd07c8fba7b37c6a4968cc"},
+    {file = "memray-1.3.1-cp39-cp39-macosx_12_0_arm64.whl", hash = "sha256:8cc349f59f56355588c6fa71c19db5dd894111303c65f4b3f6ab50e27b6347f9"},
+    {file = "memray-1.3.1-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:9ce37915f21495ff7d6d4b3f56852a9b9a48adf37494aa57ba5da02519601d2f"},
+    {file = "memray-1.3.1-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl", hash = "sha256:47271aa3016c1d421741674ce6a40b7833fbdf3db925fc527e38a915e7f9c0ce"},
+    {file = "memray-1.3.1.tar.gz", hash = "sha256:23cdf6c6da0b6db47627e56bb9f618bd52ee635dca4ef3b791ffc9e473407da5"},
 ]
 mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
@@ -591,8 +600,8 @@ pygments = [
     {file = "Pygments-2.11.2.tar.gz", hash = "sha256:4e426f72023d88d03b2fa258de560726ce890ff3b630f88c21cbb8b2503b8c6a"},
 ]
 rich = [
-    {file = "rich-10.16.2-py3-none-any.whl", hash = "sha256:c59d73bd804c90f747c8d7b1d023b88f2a9ac2454224a4aeaf959b21eeb42d03"},
-    {file = "rich-10.16.2.tar.gz", hash = "sha256:720974689960e06c2efdb54327f8bf0cdbdf4eae4ad73b6c94213cad405c371b"},
+    {file = "rich-12.5.1-py3-none-any.whl", hash = "sha256:2eb4e6894cde1e017976d2975ac210ef515d7548bc595ba20e195fb9628acdeb"},
+    {file = "rich-12.5.1.tar.gz", hash = "sha256:63a5c5ce3673d3d5fbbf23cd87e11ab84b6b451436f1b7f19ec54b6bc36ed7ca"},
 ]
 sqlparse = [
     {file = "sqlparse-0.4.2-py3-none-any.whl", hash = "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"},
