@@ -6,7 +6,7 @@ authors = ["Carlos Gonzalez <carlos.gonzalez@with-madrid.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Django = "^4.0.4"
+Django = "^4.1.4"
 gunicorn = {extras = ["gevent"], version = "^20.1.0"}
 memray = "^1.0.3"
 
